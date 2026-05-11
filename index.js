@@ -43,6 +43,7 @@ async function run() {
 
         app.post('/data', async (req, res) => {
             const newdata = req.body;
+            // console.log(newdata, 'new data ');
             const data = await collectiondb.insertOne(newdata)
             res.send(data)
         })
@@ -60,10 +61,11 @@ async function run() {
             const data = await collectiondb.deleteOne(query)
             res.send(data)
         })
-        app.patch('/data/:id/edit', async (req, res) => {
+        app.patch('/data/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
             const updatedData = req.body;
+            console.log(updatedData, "updatedData");
             const data = await collectiondb.updateOne(
                 query,
                 {
