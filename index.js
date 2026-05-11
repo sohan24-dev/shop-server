@@ -41,6 +41,12 @@ async function run() {
             res.send(data)
         })
 
+        app.post('/data', async (req, res) => {
+            const newdata = req.body;
+            const data = await collectiondb.insertOne(newdata)
+            res.send(data)
+        })
+
         app.get('/data/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
