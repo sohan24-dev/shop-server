@@ -35,26 +35,26 @@ async function run() {
         const collectiondb = database.collection("products")
 
 
-        app.get('/', async (req, res) => {
+        app.get('/data', async (req, res) => {
             const cursor = await collectiondb.find()
             const data = await cursor.toArray()
             res.send(data)
         })
 
-        app.get('/about/:id', async (req, res) => {
+        app.get('/data/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
             const data = await collectiondb.findOne(query)
             res.send(data)
         })
 
-        app.delete('/delete/:id', async (req, res) => {
+        app.delete('/data/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
             const data = await collectiondb.deleteOne(query)
             res.send(data)
         })
-        app.patch('/about/:id/edit', async (req, res) => {
+        app.patch('/data/:id/edit', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
             const updatedData = req.body;
